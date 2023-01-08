@@ -7,8 +7,7 @@ local Scammers = List.Scammers
 local Bots = List.Bots
 
 local Arguments = {...}
-local DisableKey = Arguments[1] or Enum.KeyCode.LeftShift
-
+local DisableKey = Arguments[1]
 print(DisableKey)
 -------------------------------------------------------------------------------
 
