@@ -1,14 +1,15 @@
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local UserInputService = game:GetService("UserInputService")
 
 local Response = game:HttpGet("https://raw.githubusercontent.com/0x580x540x43/ScammerList/main/List.json")
 local List = game:GetService("HttpService"):JSONDecode(Response)
 local Scammers = List.Scammers
 local Bots = List.Bots
+local ScriptEnabled = true
 
 local Arguments = {...}
-local DisableKey = Arguments[1]
-print(DisableKey)
+local DisableKey = Arguments[1] or Enum.KeyCode.RightControl
 -------------------------------------------------------------------------------
 
 local ScammerBillboard = Instance.new("BillboardGui", ReplicatedStorage)
@@ -41,7 +42,11 @@ BotText.TextColor3 = Color3.fromRGB(0, 238, 255)
 -------------------------------------------------------------------------------
 
 local function addBillboard(Character, Type)
+    if ScriptEnabled == false then return end
     local Head = Character:WaitForChild("Head")
+    if Head:FindFirstChildWhichIsA("BillboardGui") ~= nil then
+        Head:FindFirstChildWhichIsA("BillboardGui"):Destroy()
+    end
     local BillboardGui, TextLabel
     if Type == "Bot" then
         task.wait()
@@ -118,5 +123,41 @@ Players.PlayerAdded:Connect(function(Player)
         Player.CharacterAdded:Connect(function(Character)
             addBillboard(Character, IsMatch)
         end)
+    end
+end)
+
+local function ShowOrHideBillboards()
+    for _, Player in pairs(Players:GetPlayers()) do
+        local Character = Player.Character
+        local Head = Character:WaitForChild("Head")
+
+        local Billboard = Head:FindFirstChildWhichIsA("BillboardGui") or nil
+
+        if Billboard ~= nil then
+            print("Found it")
+            if ScriptEnabled == true then
+                Billboard.Active = true
+                Billboard:FindFirstChildWhichIsA("TextLabel").Visible = true
+            elseif ScriptEnabled == false then
+                Billboard.Active = false
+                Billboard:FindFirstChildWhichIsA("TextLabel").Visible = false
+            end
+        end
+    end
+end
+
+
+UserInputService.InputBegan:Connect(function(Input)
+    if Input.UserInputType == Enum.UserInputType.Keyboard then
+        if Input.KeyCode == DisableKey then
+            print(Input.KeyCode)
+            if ScriptEnabled == true then
+                ScriptEnabled = false
+                ShowOrHideBillboards()
+            else
+                ScriptEnabled = true
+                ShowOrHideBillboards()
+            end
+        end
     end
 end)
