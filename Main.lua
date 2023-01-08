@@ -2,7 +2,7 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local UserInputService = game:GetService("UserInputService")
 
-local Response = game:HttpGet("https://raw.githubusercontent.com/0x580x540x43/ScammerList/main/List.json")
+local Response = game:HttpGet("https://raw.githubusercontent.com/0x580x540x43/BotList/main/List.json")
 local List = game:GetService("HttpService"):JSONDecode(Response)
 local Scammers = List.Scammers
 local Bots = List.Bots
