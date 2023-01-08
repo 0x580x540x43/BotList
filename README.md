@@ -4,7 +4,7 @@
 
 
 ```lua
-local DisableScriptKey = Enum.KeyCode.LeftControl
+local DisableScriptKey = Enum.KeyCode.RightControl
 
 repeat task.wait() until game.Loaded
 if game.GameId == 3317679266 then
