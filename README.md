@@ -8,7 +8,7 @@ local DisableScriptKey = Enum.KeyCode.LeftControl
 
 repeat task.wait() until game.Loaded
 if game.GameId == 3317679266 then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/0x580x540x43/ScammerList/main/Main.lua"))(DisableScriptKey)
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/0x580x540x43/BotList/main/Main.lua"))(DisableScriptKey)
 end
 ```
 
