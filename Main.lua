@@ -42,6 +42,10 @@ BotText.TextColor3 = Color3.fromRGB(0, 238, 255)
 -------------------------------------------------------------------------------
 
 local function addBillboard(Character, Type)
+    Response = game:HttpGet("https://raw.githubusercontent.com/0x580x540x43/BotList/main/List.json")
+    List = game:GetService("HttpService"):JSONDecode(Response)
+    Scammers = List.Scammers
+    Bots = List.Bots
     if ScriptEnabled == false then return end
     local Head = Character:WaitForChild("Head")
     if Head:FindFirstChildWhichIsA("BillboardGui") ~= nil then
